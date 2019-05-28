@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col">Applica un filtro alla tua ricerca:
+      <input type="text" id="myInput" [(ngModel)]="filtro.Titolo" placeholder="Titolo...">
+    <table id="myTable" class="table my-3">
+      <thead class="thead-dark text-center">
+        <tr>
+          <th rowspan="2" scope="col" class="align-middle">#</th>
+          <th rowspan="2" scope="col" class="align-middle">Titolo</th>
+          <th rowspan="2" scope="col" class="align-middle">Anno Pubblicazione</th>
+          <th rowspan="2" scope="col" class="align-middle">Conferenza</th>
+          <th rowspan="2" scope="col" class="align-middle">Giornale</th>
+          <th rowspan="2" scope="col" class="align-middle">Azione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let j of art_list | filterBy: filtro">
+          <th scope="row" style="text-align: center;">{{ art_list.indexOf(j) }}</th>
+          <td style="text-align: center;">{{ j.Titolo }}</td>
+          <td style="text-align: center;">{{ j.AnnoPubblicazione }}</td>
+          <td style="text-align: center;">{{ j.Nome == "None" ? "N/A" : j.Nome}} {{ j.Data == "None" || j.Data == "mancante" ? "" : j.Data }}</td>
+          <td style="text-align: center;">{{ j.g_titolo == "None" ? "N/A" : j.g_titolo}}</td>
+          <td style="text-align: center;"><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/articolo/', j.idArticolo]">Visualizza</button></td>
+        </tr>
+        <tr *ngIf="art_list.length === 0">
+          <td colspan="7"><small>Nessun articolo trovato.</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="text-value text-center">Numero di articoli per Anno</div>
+    <canvas baseChart class="chart chart-bar" [datasets]="lineChartCount" [labels]="lineChartAnno" [options]="lineChartOptions" [legend]="false" [chartType]="'line'"></canvas>
+  </div>
+  <div class="col">
+      <div class="text-value text-center">Numero di articoli per Repository</div>
+      <canvas baseChart class="chart" [data]="pieChartCount" [labels]="pieChartRepo" [options]="pieChartOptions" [legend]="true" [chartType]="'pie'" [colors]="pieChartColors"></canvas>
+  </div><hr>
+  <div class="col">
+    <ngb-tabset>
+      <ngb-tab title="TOP5 Parole chiave">
+        <ng-template ngbTabContent>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Termine</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let k of top5kw">
+              <th scope="row">{{ top5kw.indexOf(k) }}</th>
+              <td>{{ k.Termine }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Altre statistiche">
+        <ng-template ngbTabContent>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">Stat</th>
+              <th scope="col">Valore</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Numero medio di riferimenti</th>
+                <td>{{ avgref }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Numero medio di coautori</th>
+                <td>{{ avgcoaut }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+</div>
+</div>

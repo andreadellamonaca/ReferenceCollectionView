@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col">Applica un filtro alla tua ricerca:
+      <input type="text" id="myInput" [(ngModel)]="filtro.NomeCompleto" placeholder="Nome...">
+    <table class="table my-3">
+      <thead class="thead-dark text-center">
+        <tr>
+          <th rowspan="2" scope="col" class="align-middle">#</th>
+          <th rowspan="2" scope="col" class="align-middle">Nome Autore</th>
+          <th rowspan="2" scope="col" class="align-middle">Azione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let j of aut_list | filterBy: filtro">
+          <th scope="row" style="text-align: center;">{{ aut_list.indexOf(j) }}</th>
+          <td style="text-align: center;">{{ j.NomeCompleto }}</td>
+          <td style="text-align: center;"><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/autore/', j.idAutore]">Visualizza</button></td>
+        </tr>
+        <tr *ngIf="aut_list.length === 0">
+          <td colspan="7"><small>Nessun autore trovato.</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+    <div class="col">
+      <h2>STATISTICHE</h2>
+    <ngb-tabset>
+        <ngb-tab title="TOP5 Autori">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Azione</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let a of top5autori">
+                <th scope="row">{{ top5autori.indexOf(a) }}</th>
+                <td>{{ a.NomeCompleto }}</td>
+                <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/autore/', a.idAutore]">Visualizza</button></td>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="TOP5 Organizzazioni">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Sede</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let r of top5orgs">
+                <th scope="row">{{ top5orgs.indexOf(r) }}</th>
+                <td>{{ r.Nome }}</td>
+                <td>{{ r.Sede }}</td>
+              </tr>
+              <tr *ngIf="top5orgs.length === 0">
+                <td colspan="7"><small>Nessuna organizzazione trovato.</small></td>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="N_Medio Autori/Articolo">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Valore</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row">{{ n_autoriperarticolo }}</th>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>        
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row align-items-center">
+  <div class="col" style="text-align:center">
+    <br><br>
+    <div class="center">
+      Ricerca autori o articoli per parola chiave:
+    </div><br>
+    <label>(Seleziona AllReference per vedere tutta la collezione!)</label>
+    <br><br>
+    <select name="kws" [(ngModel)]="selectedkw" style="width: 300px;">
+        <option value="0">All Reference</option>
+        <option *ngFor="let kw of kws" value="{{ kw.idParolaChiave }}">{{ kw.Termine }}</option>
+    </select><br><br><br>
+    <div class="center">
+      <input type="radio" name="articoli" [(ngModel)]="selsection" value="art" [checked]="true"> Articoli<br>
+      <input type="radio" name="autori" [(ngModel)]="selsection" value="aut"> Autori<br>
+    </div><br><br>
+    <button type="button" (click)="gotoVE()" class="btn btn-dark">Cerca</button>
+  </div>
+  <div class="col" style="text-align:center">
+    <br><br>
+    <div class="center">
+      Ricerca per autore:
+    </div>
+    <br><br><br><br><br>
+    <select name="autori" [(ngModel)]="selectedaut" style="width: 300px;">
+      <option *ngFor="let aut of autori_list" value="{{ aut.idAutore }}">{{ aut.NomeCompleto }}</option>
+    </select>
+    <br><br><br><br><br><br>
+    <button type="button" [routerLink]="['/autore/', selectedaut]" class="btn btn-dark">Cerca</button>
+  </div>
+</div>

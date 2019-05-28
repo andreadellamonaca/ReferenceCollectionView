@@ -1,0 +1,68 @@
+<div>
+  <div class="card">
+    <div class="card-body">
+      <h1>{{ detail.Titolo }}</h1>
+      <hr>
+      {{ detail.Abstract }}
+      <p class="card-text">Anno: {{ detail.AnnoPubblicazione }}</p>
+      <p class="card-text">DOI: {{ detail.DOI != "" || detail.DOI != "undefined" ? detail.DOI : "N/A" }}</p>
+      <p class="card-text">ISSN: {{ detail.ISSN != "assente" ? detail.ISSN : "N/A"}}</p>
+      <p class="card-text">ISBN: {{ detail.ISBN != "mancante" ? detail.ISBN : "N/A"}}</p>
+      <p class="card-text">Conferenza: {{ detail.Nome != "None" ? detail.Nome : "N/A" }}, {{ detail.Luogo != "assente" && detail.Luogo != "None" ? detail.Luogo : ""}}, {{ detail.Data != "mancante" && detail.Data != "None" ? detail.Data : ""}}</p>
+      <p class="card-text">Giornale: {{ detail.g_titolo != "None" ? detail.g_titolo : "N/A"}}</p>
+      <hr>
+      <p class="card-text">Parole chiave: </p><div *ngFor="let k of kws">{{ k.Termine }},</div>
+      <hr>
+      <a class="btn btn-primary" href="{{ u.URL_Articolo }}" target="_blank" role="button" *ngFor="let u of urls">{{ u.Nome }}</a>
+      <hr>
+      <ngb-tabset>
+        <ngb-tab title="Lista Autori">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Azione</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let a of autori">
+                <th scope="row">{{ autori.indexOf(a) }}</th>
+                <td>{{ a.NomeCompleto }}</td>
+                <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/autore/', a.idAutore]">Visualizza</button></td>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Lista Riferimenti">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titolo</th>
+                <th scope="col">Anno Pubblicazione</th>
+                <th scope="col">Azione</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let r of riferimenti">
+                <th scope="row">{{ riferimenti.indexOf(r) }}</th>
+                <td>{{ r.Titolo }}</td>
+                <td>{{ r.AnnoPubblicazione }}</td>
+                <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/articolo/', r.idArticolo]">Visualizza</button></td>
+              </tr>
+              <tr *ngIf="riferimenti.length === 0">
+                <td colspan="7"><small>Nessun riferimento trovato.</small></td>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+      
+    </div>
+  </div>
+</div>

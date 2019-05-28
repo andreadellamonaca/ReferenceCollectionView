@@ -1,0 +1,41 @@
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+   
+    
+    text-align: left;
+    
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+
+thead {
+    width: 100%;
+}
+
+tbody {
+   
+  
+    max-height: 400px;
+    width: 100%;
+        /* body takes all the remaining available space */
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+}
+
+
+
+
+
+
+table tbody tr {
+    width: 100%;
+}
+table thead,
+table tbody tr {
+    display: table;
+    table-layout: fixed;
+}

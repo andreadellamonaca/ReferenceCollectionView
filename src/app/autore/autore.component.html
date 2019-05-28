@@ -1,0 +1,89 @@
+<div>
+  <div class="card">
+    <div class="card-body">
+      <h1>{{ autore.NomeCompleto }}</h1>
+      <hr>
+      <p class="card-text">Affiliazioni: </p><div *ngFor="let a of affiliazioni">{{ a.Nome }}, {{ a.Sede }}</div>
+      <hr>
+      <ngb-tabset>
+        <ngb-tab title="Lista coautori">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Azione</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let a of coaut">
+                <th scope="row">{{ coaut.indexOf(a) }}</th>
+                <td>{{ a.NomeCompleto }}</td>
+                <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/autore/', a.idAutore]">Visualizza</button></td>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Lista Articoli">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titolo</th>
+                <th scope="col">Anno Pubblicazione</th>
+                <th scope="col">Azione</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let t of articoli">
+                <th scope="row">{{ articoli.indexOf(t) }}</th>
+                <td>{{ t.Titolo }}</td>
+                <td>{{ t.AnnoPubblicazione }}</td>
+                <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/articolo/', t.idArticolo]">Visualizza</button></td>
+              </tr>
+              <tr *ngIf="articoli.length === 0">
+                <td colspan="7"><small>Nessun articolo trovato.</small></td>
+              </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+      
+    </div>
+    <h2>STATISTICHE</h2>
+    <div class="row">
+      <div class="col">
+        <div class="text-value text-center">Numero di articoli per Anno</div>
+        <canvas baseChart class="chart chart-bar" [datasets]="lineChartCount" [labels]="lineChartAnno" [options]="lineChartOptions" [legend]="false" [chartType]="'line'"></canvas>
+      </div>
+      <div class="col">
+          <ngb-tabset>
+              <ngb-tab title="TOP5 coautori">
+                <ng-template ngbTabContent>
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Azione</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let a of top5_coaut">
+                      <th scope="row">{{ top5_coaut.indexOf(a) }}</th>
+                      <td>{{ a.NomeCompleto }}</td>
+                      <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/autore/', a.idAutore]">Visualizza</button></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>
