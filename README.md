@@ -1,7 +1,7 @@
 # RefView 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
-Libraries to be installed: ng2-charts, ngx-filter-pipe, chart.js
+Libraries to be installed: ng2-charts, ngx-filter-pipe, chart.js [Run npm install in order to install all dependencies]
 
 ## Development server
 
