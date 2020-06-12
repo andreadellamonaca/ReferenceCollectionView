@@ -1,5 +1,10 @@
 # RefView 
 
+A system has been designed and developed to populate an SQL database through automatic operations on Google Scholar,
+Web Of Science, IEEE DL, DBLP, ACM, etc. concerning bibliographical references related to a keyword. 
+This project is a web app developed using the Angular framework; It allows the visualization of information sheets and analytics to discover important qualitative and quantitative trends such as the distribution of authors on topics, the main research topics, related
+keywords or the authors who contribute most to growth in that field.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 Libraries to be installed: ng2-charts, ngx-filter-pipe, chart.js [Run npm install in order to install all dependencies]
 
